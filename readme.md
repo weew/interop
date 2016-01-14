@@ -6,3 +6,15 @@
 [![Version](https://img.shields.io/packagist/v/weew/php-interop.svg)](https://packagist.org/packages/weew/php-interop)
 [![Licence](https://img.shields.io/packagist/l/weew/php-interop.svg)](https://packagist.org/packages/weew/php-interop)
 
+## Table of contents
+
+- [Installation](#installation)
+- [Introduction](#introduction)
+
+## Installation
+
+`composer require weew/php-interop`
+
+## Introduction
+
+This package offers a small set of interfaces that web services may use to define cross boundary contracts.

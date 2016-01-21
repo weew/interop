@@ -6,12 +6,12 @@ use Weew\Http\IHttpResponse;
 
 interface IFeedback {
     /**
-     * @param IHttpResponse $request
+     * @param IHttpResponse $response
      */
-    function readResponse(IHttpResponse $request);
+    function readResponse(IHttpResponse $response);
 
     /**
-     * @param IHttpResponse $request
+     * @param IHttpResponse $response
      */
-    function writeResponse(IHttpResponse $request);
+    function writeResponse(IHttpResponse $response);
 }

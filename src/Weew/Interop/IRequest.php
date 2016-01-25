@@ -3,6 +3,8 @@
 namespace Weew\Interop;
 
 use Weew\Http\IHttpRequest;
+use Weew\Http\IHttpResponse;
+use Weew\HttpClient\IHttpClient;
 use Weew\Url\IUrl;
 
 interface IRequest {
@@ -25,6 +27,14 @@ interface IRequest {
      * @param IHttpRequest $httpRequest
      */
     function writeHttpRequest(IHttpRequest $httpRequest);
+
+    /**
+     * @param IUrl $endpoint
+     * @param IHttpClient|null $client
+     *
+     * @return IHttpResponse
+     */
+    function send(IUrl $endpoint, IHttpClient $client = null);
 
     /**
      * @param IUrl $url

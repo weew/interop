@@ -7,6 +7,7 @@ use Tests\Weew\Interop\Stubs\FakeClient;
 use Tests\Weew\Interop\Stubs\FakeRequest;
 use Weew\Http\HttpRequest;
 use Weew\Http\IHttpRequest;
+use Weew\HttpClient\IHttpClient;
 use Weew\Url\Url;
 
 class RequestTest extends PHPUnit_Framework_TestCase {
@@ -35,10 +36,15 @@ class RequestTest extends PHPUnit_Framework_TestCase {
     public function test_send() {
         $httpRequest = new HttpRequest();
         $url = new Url();
-        $client = new FakeClient();
         $request = new FakeRequest($httpRequest);
-        $request->send($url, $client);
+        $request->send($url);
         $this->assertEquals('write send', $httpRequest->getContent());
         $this->assertTrue($httpRequest->getUrl() === $url);
+    }
+
+    public function test_create_client_returns_an_http_client() {
+        $request = new FakeRequest();
+        $client = $request->createDefaultHttpClient();
+        $this->assertTrue($client instanceof IHttpClient);
     }
 }

@@ -5,6 +5,7 @@ namespace Weew\Interop;
 use Weew\Http\IHttpRequest;
 use Weew\Http\IHttpResponse;
 use Weew\Http\Requests\JsonRequest;
+use Weew\HttpClient\HttpClient;
 use Weew\HttpClient\IHttpClient;
 use Weew\Url\IUrl;
 
@@ -57,11 +58,15 @@ abstract class Request implements IRequest {
 
     /**
      * @param IUrl $endpoint
-     * @param IHttpClient $client
+     * @param IHttpClient|null $client
      *
      * @return IHttpResponse
      */
-    public function send(IUrl $endpoint, IHttpClient $client) {
+    public function send(IUrl $endpoint, IHttpClient $client = null) {
+        if ( ! $client instanceof IHttpClient) {
+            $client = $this->createHttpClient();
+        }
+
         $request = $this->buildHttpRequest($endpoint);
         $response = $client->send($request);
 
@@ -73,5 +78,12 @@ abstract class Request implements IRequest {
      */
     protected function createHttpRequest() {
         return new JsonRequest();
+    }
+
+    /**
+     * @return IHttpClient
+     */
+    protected function createHttpClient() {
+        return new HttpClient();
     }
 }

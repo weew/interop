@@ -17,4 +17,14 @@ interface ITask {
      * @return IHttpRequest
      */
     function toHttpRequest(IUrl $url);
+
+    /**
+     * @param array $array
+     */
+    function fromArray(array $array);
+
+    /**
+     * @return array
+     */
+    function toArray();
 }

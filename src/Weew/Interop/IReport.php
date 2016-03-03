@@ -15,4 +15,14 @@ interface IReport extends IHttpResponseable {
      * @return IHttpResponse
      */
     function toHttpResponse();
+
+    /**
+     * @param array $array
+     */
+    function fromArray(array $array);
+
+    /**
+     * @return array
+     */
+    function toArray();
 }

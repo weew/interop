@@ -6,6 +6,7 @@ use Exception;
 use PHPUnit_Framework_TestCase;
 use Tests\Weew\Interop\Stubs\EmptyReport;
 use Tests\Weew\Interop\Stubs\FakeReport;
+use Weew\Collections\Dictionary;
 use Weew\Http\HttpResponse;
 
 class ReportTest extends PHPUnit_Framework_TestCase {
@@ -19,6 +20,16 @@ class ReportTest extends PHPUnit_Framework_TestCase {
         $response->setContent('foo');
         $report = new FakeReport($response);
         $this->assertEquals('foo', $report->getContent());
+    }
+
+    public function test_create_with_arrayable() {
+        $report = new FakeReport(new Dictionary(['data']));
+        $this->assertEquals(['data'], $report->getContent());
+    }
+
+    public function test_create_with_array() {
+        $report = new FakeReport(['data']);
+        $this->assertEquals(['data'], $report->getContent());
     }
 
     public function test_throws_to_http_response_is_not_implemented_exception() {

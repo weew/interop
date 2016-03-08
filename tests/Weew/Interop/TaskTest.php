@@ -6,6 +6,7 @@ use Exception;
 use PHPUnit_Framework_TestCase;
 use Tests\Weew\Interop\Stubs\EmptyTask;
 use Tests\Weew\Interop\Stubs\FakeTask;
+use Weew\Collections\Dictionary;
 use Weew\Http\HttpRequest;
 use Weew\Url\Url;
 
@@ -21,6 +22,16 @@ class TaskTest extends PHPUnit_Framework_TestCase {
 
         $task = new FakeTask($request);
         $this->assertEquals('foo', $task->getContent());
+    }
+
+    public function test_create_with_arrayable() {
+        $task = new FakeTask(new Dictionary(['data']));
+        $this->assertEquals(['data'], $task->getContent());
+    }
+
+    public function test_create_with_array() {
+        $task = new FakeTask(['data']);
+        $this->assertEquals(['data'], $task->getContent());
     }
 
     public function test_throws_to_http_request_is_not_implemented_exception() {

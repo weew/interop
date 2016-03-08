@@ -16,6 +16,10 @@ class FakeReport extends Report {
         $this->content = $response->getContent();
     }
 
+    public function fromArray(array $array) {
+        $this->content = $array;
+    }
+
     public function toHttpResponse() {
     }
 }

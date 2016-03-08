@@ -3,17 +3,22 @@
 namespace Weew\Interop;
 
 use Exception;
+use Weew\Contracts\IArrayable;
 use Weew\Http\IHttpResponse;
 
 abstract class Report implements IReport {
     /**
      * Report constructor.
      *
-     * @param IHttpResponse|null $response
+     * @param IHttpResponse|IArrayable|array|null $data
      */
-    public function __construct(IHttpResponse $response = null) {
-        if ($response instanceof IHttpResponse) {
-            $this->fromHttpResponse($response);
+    public function __construct($data = null) {
+        if ($data instanceof IHttpResponse) {
+            $this->fromHttpResponse($data);
+        } else if ($data instanceof IArrayable) {
+            $this->fromArray($data->toArray());
+        } else if (is_array($data)) {
+            $this->fromArray($data);
         }
     }
 

@@ -16,6 +16,10 @@ class FakeTask extends Task {
     public function toHttpRequest(IUrl $url) {
     }
 
+    public function fromArray(array $array) {
+        $this->content = $array;
+    }
+
     public function getContent() {
         return $this->content;
     }

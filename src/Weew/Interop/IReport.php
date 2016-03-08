@@ -2,10 +2,12 @@
 
 namespace Weew\Interop;
 
+use Weew\Contracts\IArrayable;
+use Weew\Contracts\IUnArrayable;
 use Weew\Http\IHttpResponse;
 use Weew\Http\IHttpResponseable;
 
-interface IReport extends IHttpResponseable {
+interface IReport extends IHttpResponseable, IArrayable, IUnArrayable {
     /**
      * @param IHttpResponse $response
      */
@@ -15,14 +17,4 @@ interface IReport extends IHttpResponseable {
      * @return IHttpResponse
      */
     function toHttpResponse();
-
-    /**
-     * @param array $array
-     */
-    function fromArray(array $array);
-
-    /**
-     * @return array
-     */
-    function toArray();
 }

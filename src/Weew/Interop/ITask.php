@@ -2,10 +2,12 @@
 
 namespace Weew\Interop;
 
+use Weew\Contracts\IArrayable;
+use Weew\Contracts\IUnArrayable;
 use Weew\Http\IHttpRequest;
 use Weew\Url\IUrl;
 
-interface ITask {
+interface ITask extends IArrayable, IUnArrayable {
     /**
      * @param IHttpRequest $request
      */
@@ -17,14 +19,4 @@ interface ITask {
      * @return IHttpRequest
      */
     function toHttpRequest(IUrl $url);
-
-    /**
-     * @param array $array
-     */
-    function fromArray(array $array);
-
-    /**
-     * @return array
-     */
-    function toArray();
 }

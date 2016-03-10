@@ -6,6 +6,7 @@ use Exception;
 use PHPUnit_Framework_TestCase;
 use Tests\Weew\Interop\Stubs\EmptyReport;
 use Tests\Weew\Interop\Stubs\FakeReport;
+use Tests\Weew\Interop\Stubs\FakeResponseable;
 use Weew\Collections\Dictionary;
 use Weew\Http\HttpResponse;
 
@@ -20,6 +21,12 @@ class ReportTest extends PHPUnit_Framework_TestCase {
         $response->setContent('foo');
         $report = new FakeReport($response);
         $this->assertEquals('foo', $report->getContent());
+    }
+
+    public function test_create_with_responseable() {
+        $responsable = new FakeResponseable();
+        $report = new FakeReport($responsable);
+        $this->assertEquals('responsable', $report->getContent());
     }
 
     public function test_create_with_arrayable() {

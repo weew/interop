@@ -5,6 +5,7 @@ namespace Tests\Weew\Interop;
 use Exception;
 use PHPUnit_Framework_TestCase;
 use Tests\Weew\Interop\Stubs\EmptyTask;
+use Tests\Weew\Interop\Stubs\FakeRequestable;
 use Tests\Weew\Interop\Stubs\FakeTask;
 use Weew\Collections\Dictionary;
 use Weew\Http\HttpRequest;
@@ -22,6 +23,13 @@ class TaskTest extends PHPUnit_Framework_TestCase {
 
         $task = new FakeTask($request);
         $this->assertEquals('foo', $task->getContent());
+    }
+
+    public function test_create_with_requestable() {
+        $requestable = new FakeRequestable();
+
+        $task = new FakeTask($requestable);
+        $this->assertEquals('requestable', $task->getContent());
     }
 
     public function test_create_with_arrayable() {

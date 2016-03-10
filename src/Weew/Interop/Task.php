@@ -5,17 +5,20 @@ namespace Weew\Interop;
 use Exception;
 use Weew\Contracts\IArrayable;
 use Weew\Http\IHttpRequest;
+use Weew\Http\IHttpRequestable;
 use Weew\Url\IUrl;
 
 abstract class Task implements ITask {
     /**
      * Task constructor.
      *
-     * @param IHttpRequest|IArrayable|array|null $data
+     * @param IHttpRequest|IHttpRequestable|IArrayable|array|null $data
      */
     public function __construct($data = null) {
         if ($data instanceof IHttpRequest) {
             $this->fromHttpRequest($data);
+        } else if ($data instanceof IHttpRequestable) {
+            $this->fromHttpRequest($data->toHttpRequest());
         } else if ($data instanceof IArrayable) {
             $this->fromArray($data->toArray());
         } else if (is_array($data)) {

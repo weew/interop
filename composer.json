@@ -1,5 +1,5 @@
 {
-    "name": "weew/php-interop",
+    "name": "weew/interop",
     "description": "Interoperability library for microservices.",
     "license": "MIT",
     "authors": [
@@ -19,7 +19,7 @@
         }
     },
     "require": {
-        "weew/php-http": "^1.7"
+        "weew/http": "^1.7"
     },
     "require-dev": {
         "phpunit/phpunit": "^4.7",

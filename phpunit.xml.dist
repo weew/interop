@@ -10,7 +10,7 @@
          syntaxCheck="false"
          bootstrap="tests/bootstrap.php">
     <testsuites>
-        <testsuite name="php-interop">
+        <testsuite name="interop">
             <directory>./tests</directory>
         </testsuite>
     </testsuites>

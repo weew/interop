@@ -5,14 +5,10 @@ namespace Weew\Interop;
 use Weew\Contracts\IArrayable;
 use Weew\Contracts\IUnArrayable;
 use Weew\Http\IHttpRequest;
+use Weew\Http\IUnHttpRequestable;
 use Weew\Url\IUrl;
 
-interface ITask extends IArrayable, IUnArrayable {
-    /**
-     * @param IHttpRequest $request
-     */
-    function fromHttpRequest(IHttpRequest $request);
-
+interface ITask extends IArrayable, IUnArrayable, IUnHttpRequestable {
     /**
      * @param IUrl $url
      *

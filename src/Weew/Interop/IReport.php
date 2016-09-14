@@ -4,17 +4,7 @@ namespace Weew\Interop;
 
 use Weew\Contracts\IArrayable;
 use Weew\Contracts\IUnArrayable;
-use Weew\Http\IHttpResponse;
 use Weew\Http\IHttpResponseable;
+use Weew\Http\IUnHttpResponseable;
 
-interface IReport extends IHttpResponseable, IArrayable, IUnArrayable {
-    /**
-     * @param IHttpResponse $response
-     */
-    function fromHttpResponse(IHttpResponse $response);
-
-    /**
-     * @return IHttpResponse
-     */
-    function toHttpResponse();
-}
+interface IReport extends IArrayable, IUnArrayable, IHttpResponseable, IUnHttpResponseable {}

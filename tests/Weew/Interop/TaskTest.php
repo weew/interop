@@ -5,9 +5,7 @@ namespace Tests\Weew\Interop;
 use Exception;
 use PHPUnit_Framework_TestCase;
 use Tests\Weew\Interop\Stubs\EmptyTask;
-use Tests\Weew\Interop\Stubs\FakeRequestable;
 use Tests\Weew\Interop\Stubs\FakeTask;
-use Weew\Collections\Dictionary;
 use Weew\Http\HttpRequest;
 use Weew\Url\Url;
 
@@ -17,28 +15,16 @@ class TaskTest extends PHPUnit_Framework_TestCase {
         $this->assertNull($task->getContent());
     }
 
-    public function test_create_with_request() {
+    public function test_create_from_request() {
         $request = new HttpRequest();
         $request->setContent('foo');
 
-        $task = new FakeTask($request);
+        $task = FakeTask::fromHttpRequest($request);
         $this->assertEquals('foo', $task->getContent());
     }
 
-    public function test_create_with_requestable() {
-        $requestable = new FakeRequestable();
-
-        $task = new FakeTask($requestable);
-        $this->assertEquals('requestable', $task->getContent());
-    }
-
-    public function test_create_with_arrayable() {
-        $task = new FakeTask(new Dictionary(['data']));
-        $this->assertEquals(['data'], $task->getContent());
-    }
-
-    public function test_create_with_array() {
-        $task = new FakeTask(['data']);
+    public function test_create_from_array() {
+        $task = FakeTask::fromArray(['data']);
         $this->assertEquals(['data'], $task->getContent());
     }
 
@@ -49,9 +35,8 @@ class TaskTest extends PHPUnit_Framework_TestCase {
     }
 
     public function test_throws_from_http_request_is_not_implemented_exception() {
-        $task = new EmptyTask();
         $this->setExpectedException(Exception::class);
-        $task->fromHttpRequest(new HttpRequest());
+        EmptyTask::fromHttpRequest(new HttpRequest());
     }
 
     public function test_throws_to_array_is_not_implemented_exception() {
@@ -61,8 +46,7 @@ class TaskTest extends PHPUnit_Framework_TestCase {
     }
 
     public function test_throws_from_array_is_not_implemented_exception() {
-        $task = new EmptyTask();
         $this->setExpectedException(Exception::class);
-        $task->fromArray([]);
+        EmptyTask::fromArray([]);
     }
 }

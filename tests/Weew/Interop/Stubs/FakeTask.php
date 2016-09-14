@@ -9,15 +9,21 @@ use Weew\Url\IUrl;
 class FakeTask extends Task {
     private $content;
 
-    public function fromHttpRequest(IHttpRequest $request) {
-        $this->content = $request->getContent();
+    public static function fromHttpRequest(IHttpRequest $request) {
+        $task = new self();
+        $task->content = $request->getContent();
+
+        return $task;
     }
 
     public function toHttpRequest(IUrl $url) {
     }
 
-    public function fromArray(array $array) {
-        $this->content = $array;
+    public static function fromArray(array $array) {
+        $task = new self();
+        $task->content = $array;
+
+        return $task;
     }
 
     public function getContent() {

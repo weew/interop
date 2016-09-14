@@ -3,34 +3,16 @@
 namespace Weew\Interop;
 
 use Exception;
-use Weew\Contracts\IArrayable;
 use Weew\Http\IHttpResponse;
-use Weew\Http\IHttpResponseable;
 
 abstract class Report implements IReport {
     /**
-     * Report constructor.
-     *
-     * @param IHttpResponse|IHttpResponseable|IArrayable|array|null $data
-     */
-    public function __construct($data = null) {
-        if ($data instanceof IHttpResponse) {
-            $this->fromHttpResponse($data);
-        } else if ($data instanceof IHttpResponseable) {
-            $this->fromHttpResponse($data->toHttpResponse());
-        } else if ($data instanceof IArrayable) {
-            $this->fromArray($data->toArray());
-        } else if (is_array($data)) {
-            $this->fromArray($data);
-        }
-    }
-
-    /**
      * @param IHttpResponse $response
      *
+     * @return mixed
      * @throws Exception
      */
-    public function fromHttpResponse(IHttpResponse $response) {
+    public static function fromHttpResponse(IHttpResponse $response) {
         throw new Exception(s(
             'Method "%s::fromHttpResponse" is not implemented yet.', get_called_class()
         ));
@@ -49,9 +31,10 @@ abstract class Report implements IReport {
     /**
      * @param array $array
      *
+     * @return mixed
      * @throws Exception
      */
-    public function fromArray(array $array) {
+    public static function fromArray(array $array) {
         throw new Exception(s(
             'Method "%s::fromArray" is not implemented yet.', get_called_class()
         ));

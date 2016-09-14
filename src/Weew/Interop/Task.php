@@ -3,35 +3,17 @@
 namespace Weew\Interop;
 
 use Exception;
-use Weew\Contracts\IArrayable;
 use Weew\Http\IHttpRequest;
-use Weew\Http\IHttpRequestable;
 use Weew\Url\IUrl;
 
 abstract class Task implements ITask {
     /**
-     * Task constructor.
-     *
-     * @param IHttpRequest|IHttpRequestable|IArrayable|array|null $data
-     */
-    public function __construct($data = null) {
-        if ($data instanceof IHttpRequest) {
-            $this->fromHttpRequest($data);
-        } else if ($data instanceof IHttpRequestable) {
-            $this->fromHttpRequest($data->toHttpRequest());
-        } else if ($data instanceof IArrayable) {
-            $this->fromArray($data->toArray());
-        } else if (is_array($data)) {
-            $this->fromArray($data);
-        }
-    }
-
-    /**
      * @param IHttpRequest $request
      *
+     * @return mixed
      * @throws Exception
      */
-    public function fromHttpRequest(IHttpRequest $request) {
+    public static function fromHttpRequest(IHttpRequest $request) {
         throw new Exception(s(
             'Method "%s::fromHttpRequest" is not implemented yet.', get_called_class()
         ));
@@ -52,9 +34,10 @@ abstract class Task implements ITask {
     /**
      * @param array $array
      *
+     * @return mixed
      * @throws Exception
      */
-    public function fromArray(array $array) {
+    public static function fromArray(array $array) {
         throw new Exception(s(
             'Method "%s::fromArray" is not implemented yet.', get_called_class()
         ));

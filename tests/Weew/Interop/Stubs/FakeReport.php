@@ -12,12 +12,18 @@ class FakeReport extends Report {
         return $this->content;
     }
 
-    public function fromHttpResponse(IHttpResponse $response) {
-        $this->content = $response->getContent();
+    public static function fromHttpResponse(IHttpResponse $response) {
+        $report = new self();
+        $report->content = $response->getContent();
+
+        return $report;
     }
 
-    public function fromArray(array $array) {
-        $this->content = $array;
+    public static function fromArray(array $array) {
+        $report = new self();
+        $report->content = $array;
+
+        return $report;
     }
 
     public function toHttpResponse() {
